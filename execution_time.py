@@ -12,33 +12,24 @@ class Timer:
     rootLogger = logging.getLogger()
     rootLogger.setLevel(logging.DEBUG)
 
-    def __init__(self,filelog=False,console=False,module_name=None):
+    def __init__(self,filelog=False,console=False,module_name=None,decorate_methods=False):
          
         self.issue_url = "https://github.com/siddhant-curious/Python-Method-Execution-Time/issues"
         
-        self.filelog = filelog
-        if self.filelog is True:
-            fileHandler = logging.FileHandler("execution_times1.log")
-            fileHandler.setFormatter(Timer.logFormatter)
-            Timer.rootLogger.addHandler(fileHandler)
-        
+        self.filelog = filelog        
         self.console = console
-        if self.console is True: 
-            consoleHandler = logging.StreamHandler(sys.stdout)
-            consoleHandler.setFormatter(Timer.logFormatter)
-            Timer.rootLogger.addHandler(consoleHandler)
-        
         self.module_name = module_name
-        if self.module_name is not None:
-            try:
-                module = sys.modules[module_name]
-                methods = getmembers(module,isfunction)
-                for name,addr in methods:
-                    setattr(module,name,self.timeit(addr))
-            except KeyError as e:
-                raise f'Error Occured, No module by name {module_name}. If you think this was a mistake than raise issue at {self.issue_url}'
         self.logtime_data = {}
-        
+
+        if self.filelog:
+            self.enable_filelogs()
+
+        if self.console:
+            self.enable_console()
+
+        if self.module_name is not None:
+            self.auto_decorate()
+    
     def timeit(self,method):
         @functools.wraps(method)
         def wrapper(*args,**kwargs):
@@ -51,3 +42,22 @@ class Timer:
                 Timer.rootLogger.info(f'Time take by method : {method.__name__}  of {self.module_name} is {total_time}')
             return result
         return wrapper
+    
+    def enable_console(self):
+        consoleHandler = logging.StreamHandler(sys.stdout)
+        consoleHandler.setFormatter(Timer.logFormatter)
+        Timer.rootLogger.addHandler(consoleHandler)
+    
+    def enable_filelogs(self):
+        fileHandler = logging.FileHandler("execution_times.log")
+        fileHandler.setFormatter(Timer.logFormatter)
+        Timer.rootLogger.addHandler(fileHandler)
+
+    def auto_decorate(self):
+        try:
+            module = sys.modules[self.module_name]
+            methods = getmembers(module,isfunction)
+            for name,addr in methods:
+                setattr(module,name,self.timeit(addr))
+        except KeyError as e:
+            raise f'Error Occured, No module by name {module_name}. If you think this was a mistake than raise issue at {self.issue_url}'

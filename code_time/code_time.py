@@ -2,7 +2,7 @@ import functools
 import time
 import os
 import logging
-from inspect import getmembers,isfunction,ismethod,isclass
+from inspect import getmembers,isfunction,ismethod
 import sys
 
 

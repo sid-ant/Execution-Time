@@ -1,0 +1,7 @@
+language: python
+python:
+- "3.6"
+install:
+- make init
+script:
+- python execution_time/tests/test_execution.py

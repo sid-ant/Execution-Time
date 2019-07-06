@@ -1,5 +1,5 @@
 import unittest
-from code_time import ExecutionTime
+from execution_time import ExecutionTime
 import time
 from unittest.mock import Mock
 import logging

@@ -1,6 +1,6 @@
 import pathlib
 import setuptools
-import code_time
+import execution_time
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
@@ -10,13 +10,13 @@ README = (HERE / "README.md").read_text()
 
 # This call to setup() does all the work
 setuptools.setup(
-    name=code_time.__name__,
-    version=code_time.__version__,
-    description="Execution time taken by each function",
+    name=execution_time.__name__,
+    version=execution_time.__version__,
+    description=u"package which provides you with a decorator to measure execution time of functions",
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/siddhant-curious/Python-Method-Execution-Time",
-    author=code_time.__author__,
+    author=execution_time.__author__,
     author_email="siddhant1042@gmail.com",
     keyword='performance execution time package',
     license="MIT",

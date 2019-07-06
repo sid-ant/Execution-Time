@@ -10,7 +10,7 @@ This is a tiny python package which provides you with a decorator to measure exe
 You should be able to install using `pip` in the usual ways:
 
 ```sh
-$ pip install execution-time
+$ pip install Execution-Time
 ```
 
 Or just clone this repository and run:

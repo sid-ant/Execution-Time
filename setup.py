@@ -1,5 +1,5 @@
 import pathlib
-from setuptools import setup
+import setuptools
 import code_time
 
 # The directory containing this file
@@ -9,7 +9,7 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 # This call to setup() does all the work
-setup(
+setuptools.setup(
     name=code_time.__name__,
     version=code_time.__version__,
     description="Execution time taken by each function",

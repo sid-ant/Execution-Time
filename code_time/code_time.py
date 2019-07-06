@@ -8,7 +8,7 @@ import sys
 
 class ExecutionTime:
 
-    logFormatter = logging.Formatter("%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s")
+    logFormatter = logging.Formatter("%(asctime)s [%(levelname)-5.5s]  %(message)s")
     rootLogger = logging.getLogger()
     rootLogger.setLevel(logging.DEBUG)
 
@@ -39,20 +39,15 @@ class ExecutionTime:
             total_time = (end_time-start_time)*1000
             self.logtime_data[method.__name__]=total_time
             if self.console is True:
-                Timer.rootLogger.info(f'Time take by method : {method.__name__}  of {self.module_name} is {total_time} ms')
+                ExecutionTime.rootLogger.info(f'Time take by method : {method.__name__} is {total_time} ms')
             return result
         return wrapper
     
     def enable_console(self):
         consoleHandler = logging.StreamHandler(sys.stdout)
-        consoleHandler.setFormatter(Timer.logFormatter)
-        Timer.rootLogger.addHandler(consoleHandler)
+        consoleHandler.setFormatter(ExecutionTime.logFormatter)
+        ExecutionTime.rootLogger.addHandler(consoleHandler)
     
-    def enable_filelogs(self):
-        fileHandler = logging.FileHandler("execution_times.log")
-        fileHandler.setFormatter(Timer.logFormatter)
-        Timer.rootLogger.addHandler(fileHandler)
-
     def auto_decorate(self):
         try:
             module = sys.modules[self.module_name]

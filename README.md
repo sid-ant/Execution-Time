@@ -29,7 +29,7 @@ Import the class `ExecutionTime`, instantiate it and `@obj.timeit` decorater bec
 from execution_time import ExecutionTime
 e = ExecutionTime()
 
-@e.timit
+@e.timeit
 def foo(arg1):
   do_something(arg1) 
   return 
@@ -41,12 +41,12 @@ def bar():
 
 foo("dragons")
 bar()
-print(e.logdata_time)
+print(e.logtime_data)
 
 ## {'foo': 0.12000000000012001, 'bar': 0.11650000000007488}
 
 ```
-`logdata_time` is a dictionary which contains the data in `methodname:time took in ms` format. 
+`logtime_data` is a dictionary which contains the data in `methodname:time took in ms` format. 
 
 ## Additonal Features
 

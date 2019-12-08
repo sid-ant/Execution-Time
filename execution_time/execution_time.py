@@ -12,17 +12,12 @@ class ExecutionTime:
     rootLogger = logging.getLogger()
     rootLogger.setLevel(logging.DEBUG)
 
-    def __init__(self,filelog=False,console=False,module_name=None):
+    def __init__(self,console=False,module_name=None):
          
         self.issue_url = "https://github.com/siddhant-curious/Python-Method-Execution-Time/issues"
-        
-        self.filelog = filelog        
         self.console = console
         self.module_name = module_name
         self.logtime_data = {}
-
-        if self.filelog:
-            self.enable_filelogs()
 
         if self.console:
             self.enable_console()
@@ -36,8 +31,17 @@ class ExecutionTime:
             start_time = time.perf_counter()
             result = method(*args,**kwargs)
             end_time = time.perf_counter()
-            total_time = (end_time-start_time)*1000
-            self.logtime_data[method.__name__]=total_time
+            total_time = round((end_time-start_time)*1000,4) # time in milliseconds 
+            
+            if method.__name__ in self.logtime_data:
+                curr = self.logtime_data[method.__name__] 
+                tt = curr["total_time"]+total_time
+                count = curr["times_called"]+1
+                avg_time=round(tt/count,4) 
+                self.logtime_data[method.__name__]={'times_called':count,"total_time":tt,"average_time":avg_time}
+            else:
+                self.logtime_data[method.__name__]={'times_called':1,"total_time":total_time,"average_time":total_time}
+
             if self.console is True:
                 ExecutionTime.rootLogger.info(f'Time take by method : {method.__name__} is {total_time} ms')
             return result

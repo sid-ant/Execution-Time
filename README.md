@@ -41,9 +41,11 @@ def bar():
 
 foo("dragons")
 bar()
+bar()
+bar()
 print(e.logtime_data)
 
-## {'foo': 0.12000000000012001, 'bar': 0.11650000000007488}
+## {'foo': {'times_called': 1, 'total_time': 0.0745, 'average_time': 0.0745}, 'bar': {'times_called': 3, 'total_time': 0.2054, 'average_time': 0.0685}}
 
 ```
 `logtime_data` is a dictionary which contains the data in `methodname:time took in ms` format. 

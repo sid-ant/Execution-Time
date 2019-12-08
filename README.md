@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/siddhant-curious/Execution-Time.svg?branch=master)](https://travis-ci.org/siddhant-curious/Execution-Time)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/siddhant-curious/Execution-Time/blob/master/LICENSE)
 
-This is a tiny python package which provides you with a decorator to measure execution time of functions. 
+This is a tiny python package which provides you with a decorator to measure execution time (in ms) of functions. 
 
 ## Installation
 

@@ -17,7 +17,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/siddhant-curious/Python-Method-Execution-Time",
     author=execution_time.__author__,
-    author_email="siddhant1042@gmail.com",
+    author_email="",
     keyword='performance execution time package',
     license="MIT",
     classifiers=[
